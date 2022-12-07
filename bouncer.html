@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+body{
+margin: 0;
+padding: 0;
+overflow: hidden;
+}
+#canvas{
+background: #fff;
+position: absolute;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+}
+.container{
+width: 100vw;
+height: 100vh;
+background: linear-gradient(360deg, purple, red);
+display: none;
+align-items: center;
+justify-content: center;
+z-index: 1000;
+}
+.container2{
+margin: 0 auto;
+width:350px;
+height:450px;
+display:flex;
+align-items: left;
+flex-direction:column;
+-webkit-animation-name: animateright;
+-webkit-animation-duration: 1s;
+animation-name: animateright;
+animation-duration: 1s;
+        }
+input{
+width: 350px;
+height: 50px;
+border: none;
+outline: none;
+border-radius: 10px;
+}
+h1{
+color:#d5ffbfa8;
+}
+@-webkit-keyframes animateright{
+  from{right:-100px; opacity:0;}
+  to{right:0px; opacity:1;}
+}
+@keyframes animateright{
+ from{right:-100px; opacity:0;}
+ to{right:0px; opacity:1;}
+ }
+</style>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page title</title>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<div class="container">
+<div class="container2">
+<h1>Login</h1>
+<input type="text" placeholder="Username">
+<br>
+<input type="text" placeholder="Password">
+</div>
+</div>
+<script>
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+let container = document.querySelector('.container');
+        
+let positionX = canvas.width / 2;
+let  positionY = canvas.height / 2;
+let angle = 0;
+let size = 20;
+let count = 0;
+let start = false;
+        
+        
+function drawCircle(){
+count ++;
+if(count <= 120){
+var gradient = ctx.createRadialGradient(positionX, positionY, 0, positionX, positionY, 25);
+gradient.addColorStop(0, 'red');
+gradient.addColorStop(1, 'purple');
+            
+ctx.beginPath();
+ctx.fillStyle = gradient;
+ctx.arc(positionX, positionY, size, 0, 2*Math.PI, false);
+ctx.fill();
+}else{
+var gradient1 = ctx.createRadialGradient(75, 50,5, 90, 60, 500);
+gradient1.addColorStop(0, 'red');
+gradient1.addColorStop(1, 'purple');
+            
+ctx.beginPath();
+ctx.fillStyle = gradient1;
+ctx.arc(positionX, positionY, size, 0, 2*Math.PI, false);
+ctx.fill();
+}
+}
+        
+        
+        
+function animate(){
+start = true;
+if(count >= 160){
+container.style.display = 'flex';
+start = false;
+canvas.remove();
+}
+if(start === true){
+ctx.clearRect(0,0, canvas.width, canvas.height);
+if(count <= 120){
+positionY += 9*Math.sin(angle);
+angle += 0.3;
+drawCircle();
+                    
+}else{
+positionY += 9*Math.sin(angle);
+size += 12;
+angle += 5;
+drawCircle();
+}
+                requestAnimationFrame(animate);
+}
+}
+animate();
+</script>
+</body>
+</html>
