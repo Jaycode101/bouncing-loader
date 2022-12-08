@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+body{
+margin: 0;
+padding: 0;
+overflow: hidden;
+}
+
+.container{
+width: 100vw;
+height: 100vh;
+background: linear-gradient(360deg, white, blue);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1000;
+}
+.container2{
+margin: 0 auto;
+width:350px;
+height:450px;
+display:flex;
+align-items: center;
+justify-content: center;
+flex-direction:column;
+}
+textarea{
+width: 350px;
+height:400px;
+border: none;
+outline: none;
+border-radius: 10px;
+background:none;
+display:flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+font-size:30px;
+color:#fff;
+font-weight:900;
+}
+
+</style>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page title</title>
+</head>
+<body>
+<div class="container">
+<div class="container2">
+<textarea id="input" autofocus></textarea> 
+</div>
+</div>
+<script>
+let input = document.getElementById('input');
+
+let allValue = ' Im a Solo Developer Please Like and Follow Please 🙏🙏🙏🙏🙏';
+
+
+let value = [];
+let index = 0;
+setInterval(function(){
+index += 1
+if (index === allValue.length)  {
+index = allValue.length - 11;
+
+for(let i = allValue.length;i > allValue.length - 13;i--){
+   value.splice(i, 1);
+
+}
+}
+let av = allValue[index];
+value.push(av);
+let str = value.join("");
+input.value = str;
+}, 200)
+</script>
+</body>
+</html>
